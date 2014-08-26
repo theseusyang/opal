@@ -15,6 +15,7 @@ angular.module('opal.controllers').controller(
         $scope.profile =  profile;
 
 	    $scope.columns = schema.columns;
+        $scope.column_names = _.pluck($scope.columns, 'name');
         $scope.tag_display = options.tag_display;
 
 	    $scope.$on('keydown', function(event, e) {
@@ -88,6 +89,11 @@ angular.module('opal.controllers').controller(
 		    });
 	    };
 
+        $scope.editSingletonColumn = function(name){
+            var cix = $scope.column_names.indexOf(name);
+            return $scope.editItem(cix, 0);
+        };
+        
 	    $scope.deleteItem = function(cix, iix) {
 		    var modal;
 		    var columnName = getColumnName(cix);
